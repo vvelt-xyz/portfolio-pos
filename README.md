@@ -8,9 +8,9 @@
 
 ## デモ URL / Operate
 
-- URL: （プレビューデプロイ後に記入。公開ゲート後に確定）
-- Auth: ID `demo`（メール `demo@vvelt.xyz`）。パスワードはクラウド作成後に README へ追記。ワンクリック可。
-- 新規登録はありません。サインアップ無効。
+- URL: https://vvelt-portfolio-pos.vercel.app （プレビュー／本番デプロイ後。公開ゲート前は private リポ）
+- Auth: ID `demo`（メール `demo@vvelt.xyz`）／パスワード `WeltPosDemo2026!`。ワンクリック可。
+- 新規登録はありません（UI なし。claim 無しアカウントはデータに入れない）。
 - バナー: ポートフォリオ用デモ。シード／リセットあり。本番店舗ではない。
 
 ### Operate（目安 5 ステップ）
