@@ -95,7 +95,7 @@ export function AppShell({
                   key={item.href}
                   href={item.href}
                   className={[
-                    "flex min-h-14 items-center justify-center px-2 text-center text-sm font-medium",
+                    "flex min-h-14 touch-manipulation items-center justify-center px-2 text-center text-sm font-medium select-none",
                     active ? "bg-zinc-900 text-white" : "text-zinc-600",
                   ].join(" ")}
                 >
