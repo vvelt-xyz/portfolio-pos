@@ -354,17 +354,17 @@ const TABLE_SHAPE = rectShape(12, 8);
 const BAR_SHAPE = rectShape(8, 8);
 
 /**
- * Default layout mirrors legacy deformed floor (stable seat ids).
- * Fine grid (48×32); seat ids unchanged.
+ * Showcase default floor (stable seat ids for remaining seats).
+ * Fine grid; bar 5/6 (right column) removed; table↔bar gap tightened.
  *   T1 T2 T3 T4
- *            B6
- *            B5
+ *
  *   B1 B2 B3 B4
  */
 export const DEFAULT_FLOOR_LAYOUT: FloorLayoutCatalog = {
-  version: 3,
+  version: 4,
   gridCols: 48,
-  gridRows: 32,
+  /** Tables rows 0–7; bars start at 18 (was 24) → shorter empty band. */
+  gridRows: 26,
   maxCanvasWidthPx: 640,
   opsBoardHeightRem: 15.5,
   categories: [
@@ -424,7 +424,7 @@ export const DEFAULT_FLOOR_LAYOUT: FloorLayoutCatalog = {
       number: 1,
       capacity: 1,
       anchorCol: 0,
-      anchorRow: 24,
+      anchorRow: 18,
     },
     {
       id: "seat_b5",
@@ -432,7 +432,7 @@ export const DEFAULT_FLOOR_LAYOUT: FloorLayoutCatalog = {
       number: 2,
       capacity: 1,
       anchorCol: 8,
-      anchorRow: 24,
+      anchorRow: 18,
     },
     {
       id: "seat_b4",
@@ -440,7 +440,7 @@ export const DEFAULT_FLOOR_LAYOUT: FloorLayoutCatalog = {
       number: 3,
       capacity: 1,
       anchorCol: 16,
-      anchorRow: 24,
+      anchorRow: 18,
     },
     {
       id: "seat_b3",
@@ -448,23 +448,7 @@ export const DEFAULT_FLOOR_LAYOUT: FloorLayoutCatalog = {
       number: 4,
       capacity: 1,
       anchorCol: 24,
-      anchorRow: 24,
-    },
-    {
-      id: "seat_b2",
-      categoryId: "cat_bar",
-      number: 5,
-      capacity: 1,
-      anchorCol: 40,
-      anchorRow: 16,
-    },
-    {
-      id: "seat_b1",
-      categoryId: "cat_bar",
-      number: 6,
-      capacity: 1,
-      anchorCol: 40,
-      anchorRow: 8,
+      anchorRow: 18,
     },
   ],
 };
