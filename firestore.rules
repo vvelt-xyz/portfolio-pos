@@ -1,0 +1,93 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Store isolation via Auth custom claim `storeId`.
+    // MUST: Every user must have claim storeId matching the path segment.
+    // EN: Require auth.token.storeId == storeId for all store data.
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function storeIdClaim() {
+      return request.auth.token.storeId;
+    }
+
+    function isStoreMember(storeId) {
+      return isSignedIn()
+        && storeIdClaim() is string
+        && storeIdClaim() == storeId;
+    }
+
+    match /stores/{storeId} {
+      match /config/{docId} {
+        allow read, write: if isStoreMember(storeId);
+      }
+
+      match /seats/{seatId} {
+        allow read: if isStoreMember(storeId);
+        allow create: if isStoreMember(storeId);
+        // Occupied seat cannot be switched to a different session. Clearing is allowed.
+        allow update: if isStoreMember(storeId)
+          && (
+            request.resource.data.activeSessionId == null
+            || resource.data.activeSessionId == null
+            || resource.data.activeSessionId == request.resource.data.activeSessionId
+          );
+        allow delete: if false;
+      }
+
+      match /sessions/{sessionId} {
+        allow read, write: if isStoreMember(storeId);
+      }
+
+      match /orderBatches/{batchId} {
+        allow read, write: if isStoreMember(storeId);
+      }
+
+      match /orderLines/{lineId} {
+        allow read, write: if isStoreMember(storeId);
+      }
+
+      match /writeOffs/{writeOffId} {
+        allow read, write: if isStoreMember(storeId);
+      }
+
+      // L3: append-only events
+      match /opsEvents/{eventId} {
+        allow read: if isStoreMember(storeId);
+        allow create: if isStoreMember(storeId);
+        allow update, delete: if false;
+      }
+
+      // L4: one primary sale document id per session (id == sessionId). Reverse sales use another id.
+      match /sales/{saleId} {
+        allow read: if isStoreMember(storeId);
+        allow create: if isStoreMember(storeId)
+          && (
+            (request.resource.data.kind == 'sale'
+              && saleId == request.resource.data.sessionId)
+            || (request.resource.data.kind == 'reverse'
+              && saleId != request.resource.data.sessionId)
+          );
+        allow update, delete: if false;
+      }
+
+      match /reverseGuards/{saleId} {
+        allow read, write: if isStoreMember(storeId);
+      }
+
+      // L5: business-day — create open/closed; update only open → closed
+      match /businessDays/{dayId} {
+        allow read: if isStoreMember(storeId);
+        allow create: if isStoreMember(storeId)
+          && request.resource.data.status in ['open', 'closed'];
+        allow update: if isStoreMember(storeId)
+          && resource.data.status == 'open'
+          && request.resource.data.status == 'closed'
+          && request.resource.data.businessDate == resource.data.businessDate;
+        allow delete: if false;
+      }
+    }
+  }
+}
