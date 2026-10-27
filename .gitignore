@@ -39,12 +39,6 @@ yarn-error.log*
 **/firebase-service-account*.json
 *-firebase-adminsdk-*.json
 
-# firebase
-.firebase/
-firebase-debug.log
-firestore-debug.log
-ui-debug.log
-
 # vercel
 .vercel
 
@@ -56,6 +50,3 @@ next-env.d.ts
 .idea/
 .vscode/*
 !.vscode/extensions.json
-
-.vercel
-.env*
