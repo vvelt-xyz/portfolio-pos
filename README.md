@@ -8,7 +8,8 @@
 
 ## デモ URL / Operate
 
-- URL: https://vvelt-portfolio-pos.vercel.app （プレビュー／本番デプロイ後。公開ゲート前は private リポ）
+- URL: https://vvelt-portfolio-pos.vercel.app  
+- GitHub: https://github.com/vvelt-xyz/portfolio-pos （public）
 - Auth: ID `demo`（メール `demo@vvelt.xyz`）／パスワード `WeltPosDemo2026!`。ワンクリック可。
 - 新規登録はありません（UI なし。claim 無しアカウントはデータに入れない）。
 - バナー: ポートフォリオ用デモ。シード／リセットあり。本番店舗ではない。
