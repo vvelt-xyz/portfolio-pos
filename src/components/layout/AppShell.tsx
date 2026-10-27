@@ -38,7 +38,8 @@ export function AppShell({
   return (
     <div
       className={[
-        "mx-auto flex h-dvh w-full flex-col bg-zinc-50",
+        // h-full (not h-dvh): root layout may reserve space for DemoBanner.
+        "mx-auto flex h-full min-h-0 w-full flex-col bg-zinc-50",
         wide
           ? "max-w-[100vw]"
           : "max-w-lg sm:max-w-2xl md:max-w-3xl lg:max-w-4xl xl:max-w-5xl",

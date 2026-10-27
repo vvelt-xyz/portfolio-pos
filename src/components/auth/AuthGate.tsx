@@ -11,7 +11,7 @@ export function AuthGate({ children }: { children: ReactNode }) {
 
   if (status === "loading") {
     return (
-      <div className="flex min-h-dvh items-center justify-center bg-zinc-50 text-sm text-zinc-600">
+      <div className="flex min-h-0 flex-1 items-center justify-center bg-zinc-50 text-sm text-zinc-600">
         {LABELS.common.loading}
       </div>
     );
@@ -23,7 +23,7 @@ export function AuthGate({ children }: { children: ReactNode }) {
 
   if (status === "missingStore") {
     return (
-      <div className="flex min-h-dvh flex-col items-center justify-center gap-4 bg-zinc-50 px-4 text-center text-zinc-900">
+      <div className="flex min-h-0 flex-1 flex-col items-center justify-center gap-4 bg-zinc-50 px-4 text-center text-zinc-900">
         <h1 className="text-xl font-semibold">
           {LABELS.auth.missingStoreTitle}
         </h1>
@@ -37,7 +37,7 @@ export function AuthGate({ children }: { children: ReactNode }) {
 
   if (status === "misconfigured") {
     return (
-      <div className="flex min-h-dvh flex-col items-center justify-center gap-4 bg-zinc-50 px-4 text-center text-zinc-900">
+      <div className="flex min-h-0 flex-1 flex-col items-center justify-center gap-4 bg-zinc-50 px-4 text-center text-zinc-900">
         <h1 className="text-xl font-semibold">
           {LABELS.auth.misconfiguredTitle}
         </h1>
@@ -48,5 +48,7 @@ export function AuthGate({ children }: { children: ReactNode }) {
     );
   }
 
-  return children;
+  return (
+    <div className="flex min-h-0 flex-1 flex-col overflow-hidden">{children}</div>
+  );
 }

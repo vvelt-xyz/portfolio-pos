@@ -4,7 +4,7 @@ import { APP, LABELS } from "@/constants";
 
 export default function Home() {
   return (
-    <div className="flex min-h-dvh flex-col items-center justify-center bg-zinc-50 px-4 text-zinc-900">
+    <div className="flex h-full min-h-0 flex-col items-center justify-center overflow-y-auto bg-zinc-50 px-4 text-zinc-900">
       <main className="flex w-full max-w-lg flex-col gap-5">
         <div className="flex items-start justify-between gap-3">
           <div className="flex flex-col gap-1">

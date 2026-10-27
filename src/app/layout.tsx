@@ -34,7 +34,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="ja"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-zinc-50 text-zinc-900">
+      {/*
+        Viewport-locked shell: DemoBanner must not push AppShell's h-dvh off-screen.
+        AppShell fills the remaining height (h-full), keeping floor/serve/admin nav sticky.
+      */}
+      <body className="flex h-dvh flex-col overflow-hidden bg-zinc-50 text-zinc-900">
         <DemoBanner />
         <AuthProvider>
           <AuthGate>
@@ -42,12 +46,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
               <FloorProvider>
                 <SessionTagsProvider>
                   <MenuProvider>
-                    <PosProvider>
-                      <div className="flex min-h-0 flex-1 flex-col">{children}</div>
-                      <footer className="border-t border-zinc-200 px-4 py-3 text-center text-xs text-zinc-500">
-                        {APP.copyright} · vvelt.xyz
-                      </footer>
-                    </PosProvider>
+                    <PosProvider>{children}</PosProvider>
                   </MenuProvider>
                 </SessionTagsProvider>
               </FloorProvider>
